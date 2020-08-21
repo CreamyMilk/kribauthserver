@@ -1,44 +1,48 @@
+require('dotenv').config()
+
 const express = require("express")
 const jwt = require("jsonwebtoken")
-require('dotenv').config()
 const app = express()
 const pool = require('./database/database')
+
+app.use(express.json())
+
+let refreshStore =  []
 
 function generateAccessToken(user) {
     return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' })
 }
 
+function generateRefreshToken(user) {
+    return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
+}
 
 app.post('/token', (req, res) => {
     const refreshToken = req.body.token
     if (refreshToken == null) return res.sendStatus(401)
     if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
-    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
-      if (err) return res.sendStatus(403)
-      const accessToken = generateAccessToken({ name: user.name })
-      res.json({ accessToken: accessToken })
-    })
-})
-
-app.get('/',(req,res)=>{
-     pool.query('SELECT r_email,r_password FROM tbl_add_rent', (err,rows) => {
-        if(err) throw err;
-            console.log('Data received from tbl_add_rent');
-            res.json(rows)
-    });
+    //jwt.verifyrows
 })
 
 app.post('/tlogin',(req,res)=>{
-    //add json validation 
-    //lookup
-    pool.query('SELECT r_email,r_password FROM tbl_add_rent WHERE r_email=? LIMIT 1',[req.body.email], (err,rows) => {
+    const email = req.body.email
+    const password = req.body.password
+    let hash = new Buffer(password).toString('base64');
+    pool.query('SELECT r_email,r_password FROM tbl_add_rent WHERE r_email=? LIMIT 1',[email], (err,rows) => {
+        let user = rows[0]
         if(err) throw err;
-        console.log('Data received from tbl_add_rent');
-        res.json(rows)
+        if(hash === user["r_password"]){
+            const refreshtoken = generateRefreshToken({user})
+            res.json({
+                token : generateAccessToken({user}),
+                refresh: refreshtoken
+            })
+        }else{
+            res.json(user)
+        }
     });
   
 })
-
 app.post('/ologin',(req,res)=>{
     pool.query('SELECT r_email,r_password FROM tbl_add_rent WHERE r_email=? LIMIT 1',[req.body.email], (err,rows) => {
         if(err) throw err;
@@ -50,17 +54,9 @@ app.post('/ologin',(req,res)=>{
 app.post('/logout',(req,res)=>{
 
 })
-app.post('/login',(req,res)=>{
-    //Lookup user in db 
-    pool.query('SELECT r_email,r_password FROM tbl_add_rent WHERE r_email=? LIMIT 1',[req.body.email], (err,rows) => {
-        if(err) throw err;
-            console.log('Data received from tbl_add_rent');
-            res.json(rows)
-    });
-    //Hash password
-    //do validarion
-    //Grant token or return error
-    //res.json({mesage:"Allowed header is POST"})
+app.delete('/logout', (req, res) => {
+    refreshTokens = refreshTokens.filter(token => token !== req.body.token)
+    res.sendStatus(204)
 })
 
 app.listen(9000,()=>{
