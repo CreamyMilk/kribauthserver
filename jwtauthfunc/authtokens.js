@@ -1,5 +1,8 @@
 const jwt = require("jsonwebtoken")
 
+function generateAccessToken(user) {
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
+}
 
 function authToken(req,res,next){
     const authHeader = req.headers['authorization']
@@ -11,10 +14,19 @@ function authToken(req,res,next){
         next()
     })
   }
+
+function generateRefreshToken(user) {
+    return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
+}
 function say(){
     console.log("Listening on port 9000")
 }
-  module.exports = {
+
+
+
+module.exports = {
       authToken,
-      say
+      say,
+      generateAccessToken,
+      generateRefreshToken
   }
