@@ -1,5 +1,5 @@
 # kribauthserver
-
+login json
 tlogin
 {
     email:"test@gmail.com",
