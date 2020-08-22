@@ -29,13 +29,13 @@ app.post('/tlogin',(req,res)=>{
     const password = req.body.password
     let hash = new Buffer(password).toString('base64');
     pool.query('SELECT r_email,r_password FROM tbl_add_rent WHERE r_email=? LIMIT 1',[email], (err,rows) => {
-        let user = rows[0]
         if(err) throw err;
+        let user = rows[0]
         if(hash === user["r_password"]){
             const refreshtoken = generateRefreshToken({user})
             res.json({
-                token : generateAccessToken({user}),
-                refresh: refreshtoken
+                access_token : generateAccessToken({user}),
+                refresh_token: refreshtoken
             })
         }else{
             res.json(user)
@@ -51,9 +51,7 @@ app.post('/ologin',(req,res)=>{
     });
   
 })
-app.post('/logout',(req,res)=>{
 
-})
 app.delete('/logout', (req, res) => {
     refreshTokens = refreshTokens.filter(token => token !== req.body.token)
     res.sendStatus(204)
