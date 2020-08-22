@@ -10,3 +10,5 @@ tlogin
     access_token:,
     refresh_token:
 }
+
+Add to headers = Bearer token
