@@ -47,9 +47,14 @@ app.post('/tlogin',(req,res)=>{
     const email = req.body.email
     const password = req.body.password
     let hash = new Buffer(password).toString('base64');
+<<<<<<< HEAD
     pool.query('SELECT r_email,r_password,rid FROM tbl_add_rent WHERE r_email=? LIMIT 1',[email], (err,rows) => {
         let user = rows[0]
+=======
+    pool.query('SELECT r_email,r_password FROM tbl_add_rent WHERE r_email=? LIMIT 1',[email], (err,rows) => {
+>>>>>>> 149d7d9d8f710f4a8fcc43ed488e6f0472cb79fa
         if(err) throw err;
+        let user = rows[0]
         if(hash === user["r_password"]){
             const refreshtoken = generateRefreshToken({user})
             refreshStore.push(refreshtoken)
@@ -63,8 +68,20 @@ app.post('/tlogin',(req,res)=>{
     });
   
 })
+<<<<<<< HEAD
 
 
+=======
+app.post('/ologin',(req,res)=>{
+    pool.query('SELECT r_email,r_password FROM tbl_add_rent WHERE r_email=? LIMIT 1',[req.body.email], (err,rows) => {
+        if(err) throw err;
+            console.log('Data received from tbl_add_rent');
+            res.json(rows)
+    });
+  
+})
+
+>>>>>>> 149d7d9d8f710f4a8fcc43ed488e6f0472cb79fa
 app.delete('/logout', (req, res) => {
     refreshTokens = refreshTokens.filter(token => token !== req.body.token)
     res.sendStatus(204)
