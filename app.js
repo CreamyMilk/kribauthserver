@@ -1,8 +1,9 @@
 require('dotenv').config()
 const express = require("express")
+const morgan = require("morgan")
 const app = express()
 
-
+app.use(morgan('tiny'))
 //Middlewares
 app.use(express.json())
 
