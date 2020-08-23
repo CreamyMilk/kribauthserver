@@ -7,11 +7,11 @@ const jwt = require("jsonwebtoken")
 let refreshStore =  []
 
 //Login
-    //Lookup user in db 
-    //Hash password
-    //do validarion
-    //Grant token or return error
-    //res.json({mesage:"Allowed header is POST"})
+//Lookup user in db 
+//Hash password
+//do validarion
+//Grant token or return error
+//res.json({mesage:"Allowed header is POST"})
 
 router.post('/login',(req,res)=>{
     const email = req.body.email || ""
@@ -24,6 +24,7 @@ router.post('/login',(req,res)=>{
             let user = rows[0]
             if(hash === user["r_password"]){
                 const refreshtoken = fun.generateRefreshToken({user})
+                //let userid = user.rid
                 refreshStore.push(refreshtoken)
                 res.json({
                     access_token : fun.generateAccessToken({user}),
@@ -51,13 +52,8 @@ router.post('/token', (req, res) => {
     
 })
 
-router.post('/',(req,res)=>{
-
-
-})
-
 router.delete('/logout', (req, res) => {
-    refreshTokens = refreshTokens.filter(token => token !== req.body.token)
+    refreshStore = refreshStore.filter(session => session.userid !== req.body.userid)
     res.sendStatus(204)
 })
 
@@ -69,5 +65,7 @@ router.get('/register',(req,res)=>{
     });
     //res.json({mesage:"Allowed header is POST"})
 })
-
+router.get("/",(req,res)=>{
+    res.json(refreshStore)
+})
 module.exports = router;
