@@ -18,9 +18,9 @@ flow token+wifi -->Add to DB -->GenerateVIEW
 [*]Rent Balance to pay
 [*]Bills Balance
 [*]Payment History -- Graph
-Complains 
-Unit Details
-Notice Board
+[*]Complains 
+[*]Unit Details
+[*]Notice Board
 Rules and regulations
 
 
