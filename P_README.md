@@ -21,7 +21,7 @@ flow token+wifi -->Add to DB -->GenerateVIEW
 [*]Complains 
 [*]Unit Details
 [*]Notice Board
-Rules and regulations
+[*]Builing details Rules and regulations
 
 
 

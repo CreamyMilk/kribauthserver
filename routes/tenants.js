@@ -56,12 +56,12 @@ router.post('/allcomplains',(req,res)=>{
         res.json(rows)
     })
 })
-router.get("/",(req,res)=>{
-    pool.query("SELECT * FROM tblbranch",(err,rows)=>{
+router.get("/building",fun.authToken,(req,res)=>{
+    let branch_id = req.user.user.branch_id 
+    pool.query("SELECT * FROM tblbranch WHERE branch_id=? LIMIT 2",[branch_id],(err,rows)=>{
         if(err) throw err;
         res.json(rows)
     })
-    //res.json(stats)
 })
 
 
