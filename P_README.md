@@ -23,7 +23,11 @@ flow token+wifi -->Add to DB -->GenerateVIEW
 [*]Notice Board
 [*]Builing details Rules and regulations
 
-
+Make a simple fltter rest api consumer
+[]login
+[]Store the tokens in to secure storage
+[]Make a toast or popup based testing area
+[]Do some sqllite for the app
 
 { tbl_add_fare
       "f_id": 44, 
