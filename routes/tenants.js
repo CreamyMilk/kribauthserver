@@ -2,6 +2,28 @@ const fun = require("../jwtauthfunc/authtokens")
 const router = require("express").Router()
 const pool = require("../database/database")
 
+router.post('/rent',(req,res)=>{
+    const user_id = req.body.rid
+    let stats ={}
+    pool.query("SELECT sum(rent) as RentDue FROM tbl_add_fair WHERE rid=? AND paid_date =''",[user_id],(err,rows)=>{
+        if(err) throw err;
+        stats['total'] = rows[0]
+        pool.query("SELECT * FROM tbl_add_fair WHERE rid=? AND paid_date=''",[user_id],(err,rows)=>{
+            if(err) throw err;
+            stats['info'] = rows
+            res.json(stats)
+        })
+    })
+    //Need Amount of rent due , days remaining
+    //pool.query("SELECT ")
+})
+router.post('/payments',(req,res)=>{
+    const user_id = req.body.rid
+    pool.query("SELECT * FROM tbl_add_fair WHERE rid=? AND paid_date !=''",[user_id],(err,rows)=>{
+        if (err) throw err;
+        res.json(rows)
+    })
+})
 router.get('/notice',fun.authToken,(req,res)=>{
     let branch_id = req.user.user.branch_id 
     pool.query("SELECT * FROM tbl_notice_board WHERE branch_id=?",[branch_id],(err,rows)=>{
