@@ -2,8 +2,8 @@ const fun = require("../jwtauthfunc/authtokens")
 const router = require("express").Router()
 const pool = require("../database/database")
 
-router.post('/rent',(req,res)=>{
-    const user_id = req.body.rid
+router.get('/rent',fun.authToken,(req,res)=>{
+    const user_id = req.user.user.rid
     let stats ={}
     pool.query("SELECT sum(rent) as RentDue FROM tbl_add_fair WHERE rid=? AND paid_date =''",[user_id],(err,rows)=>{
         if(err) throw err;
