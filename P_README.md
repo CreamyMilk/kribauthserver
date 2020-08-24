@@ -29,7 +29,7 @@ flow token+wifi -->Add to DB -->GenerateVIEW
 []See past completed Complains
 
 # Owner
-[]Login
+[*]Login
 []See Number of units he has
 []See tenants Info
 []His Employees
