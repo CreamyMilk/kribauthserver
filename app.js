@@ -11,10 +11,11 @@ app.use(express.json())
 //Routing
 const tenantAuthRoute = require('./routes/auth/a_tenats')
 const tenantRoute = require('./routes/tenants')
-
+const employeeAuthRoute = require('./routes/auth/a_employees')
 
 //Handlers
 app.use("/api/v1/auth/tenant",tenantAuthRoute)
+app.use('/api/v1/auth/employee',employeeAuthRoute)
 app.use("/api/v1/tenant",tenantRoute)
 
 app.use((req,res,next)=>{

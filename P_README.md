@@ -23,6 +23,9 @@ flow token+wifi -->Add to DB -->GenerateVIEW
 [*]Notice Board
 [*]Builing details Rules and regulations
 
+# Employee
+[]Login
+
 Make a simple fltter rest api consumer
 []login
 []Store the tokens in to secure storage
