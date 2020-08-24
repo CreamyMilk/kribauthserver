@@ -12,7 +12,7 @@ app.use(express.json())
 // const employeeAuthRoute = require('./routes/auth/a_employees')
 const ownerAuthRoute = require('./routes/auth/a_owners')
 const tenantAuthRoute = require('./routes/auth/a_tenats')
-const tenantRoute = require('./routes/tenants')
+const tenantRoute = require('./routes/tenant')
 
 
 //Handlers
