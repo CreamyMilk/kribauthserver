@@ -25,12 +25,35 @@ flow token+wifi -->Add to DB -->GenerateVIEW
 
 # Employee
 []Login
+[]See Assigned Complains
+[]See past completed Complains
+
+# Owner
+[]Login
+[]See Number of units he has
+[]See tenants Info
+[]His Employees
+Rent
+[]Required
+[]Collected
+[]Remaing and by who
+[]Maintance done and Expenses
+[]Graph for when and how much money is paid based on Day to Day basis
+[]Complains
+
+
 
 Make a simple fltter rest api consumer
 []login
 []Store the tokens in to secure storage
 []Make a toast or popup based testing area
 []Do some sqllite for the app
+
+
+# Employee
+[]Login
+[]See Assigned Complains
+[]See past completed Complains
 
 { tbl_add_fare
       "f_id": 44, 
