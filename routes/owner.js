@@ -20,11 +20,24 @@ router.get('/units',fun.authToken,(req,res)=>{
     })
     //res.json(units)
 })
-router.get('/costs',(req,res)=>{
+router.get('/tenants',(req,res)=>{
     const user_id = req.user.user.ownid
     
 })
 
+router.get('/employees',(req,res)=>{
+    const user_id = req.user.user.ownid
+    
+})
 
+router.get('/rent',(req,res)=>{
+    const user_id = req.user.user.ownid
+    
+})
+
+router.get('/costs',(req,res)=>{
+    const user_id = req.user.user.ownid
+    
+})
 
 module.exports = router
