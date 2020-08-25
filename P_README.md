@@ -30,7 +30,7 @@ flow token+wifi -->Add to DB -->GenerateVIEW
 
 # Owner
 [*]Login
-[]See Number of units he has
+[]See Number of units,details.
 []See tenants Info
 []His Employees
 Rent
