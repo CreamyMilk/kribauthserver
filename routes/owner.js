@@ -40,4 +40,11 @@ router.get('/costs',(req,res)=>{
     
 })
 
+router.get('/',(req,res)=>{
+    pool.query('SELECT *,ar.image as r_image,ar.r_name,fl.floor_no as fl_floor,u.unit_no as u_unit,m.month_name from tbl_add_fair f inner join tbl_add_floor fl on fl.fid = f.floor_no inner join tbl_add_unit u on u.uid = f.unit_no inner join tbl_add_month_setup m on m.m_id = f.month_id inner join tbl_add_rent ar on ar.rid = f.rid where bill_status = "0" and f.branch_id = "8" order by f.f_id desc',(err,rows)=>{
+        res.json(rows)
+    })
+
+})
+
 module.exports = router
