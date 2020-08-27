@@ -27,7 +27,7 @@ router.get('/tenants',(req,res)=>{
 
 router.get('/employees',(req,res)=>{
     const user_id = req.user.user.ownid
-    
+    res.json({message:"All employees"})
 })
 
 router.get('/rent',(req,res)=>{
