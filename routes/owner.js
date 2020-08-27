@@ -37,7 +37,7 @@ router.get('/rent',(req,res)=>{
 
 router.get('/costs',(req,res)=>{
     const user_id = req.user.user.ownid
-    
+    res.json({message:"All costs"})
 })
 
 router.get('/',(req,res)=>{
