@@ -6,7 +6,7 @@ Make call to get usedata
 }
 
 
-
+new
 idea is that when you login in i send you the two tokens one lasts 2hr<Local Variable> the othe 2 weeks in Secure storage
 So when you open the app first we see if you have a stored refresh token + Wifi
 which i use to send to the api where you get an access token an load all the new userdata into the db
